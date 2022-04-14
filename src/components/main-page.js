@@ -1,6 +1,5 @@
 import React from "react";
-
-const getQuotes = () => fetch("/quotes");
+import { getQuotes } from "../services"
 
 export const MainPage = () => {
   const [isLoading, setIsLoading] = React.useState(true);
