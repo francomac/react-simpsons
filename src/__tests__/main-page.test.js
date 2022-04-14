@@ -11,3 +11,11 @@ describe("Main Page mount", () => {
     ).toBeInTheDocument();
   });
 });
+
+describe("Quotes List", () => {
+    it("must display 3 quotes", async () => {
+      render(<MainPage />)
+  
+      expect(await screen.findAllByRole("listitem")).toHaveLength(3)
+    })
+  })
