@@ -16,7 +16,17 @@ describe("Main Page mount", () => {
 
 describe("Quotes List", () => {
   it("must display 3 quotes", async () => {
-
     expect(await screen.findAllByRole("listitem")).toHaveLength(3);
+  });
+
+  it("must contain quote value", async () => {
+    const [firstQuote, secondQuote, thirdQuote] = await screen.findAllByRole(
+      "listitem"
+    );
+    expect(firstQuote.textContent).toBe("Gah, stupid sexy Flanders!");
+    expect(secondQuote.textContent).toBe("Eat my shorts");
+    expect(thirdQuote.textContent).toBe(
+      "Shut up, brain. I got friends now. I don't need you anymore"
+    );
   });
 });
