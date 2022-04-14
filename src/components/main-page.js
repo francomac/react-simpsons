@@ -6,7 +6,7 @@ export const MainPage = () => {
   const [quotes, setQuotes] = React.useState([]);
 
   React.useEffect(() => {
-    getQuotes()
+    getQuotes(3)
       .then((response) => response.json())
       .then((data) => setQuotes(data))
       .finally(() => setIsLoading(false));

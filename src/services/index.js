@@ -3,4 +3,4 @@ const baseUrl =
     ? "https://thesimpsonsquoteapi.glitch.me/"
     : "";
 
-export const getQuotes = () => fetch(`${baseUrl}/quotes`);
+export const getQuotes = (quotesNum) => fetch(`${baseUrl}/quotes?count=${quotesNum}`);
