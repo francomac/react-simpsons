@@ -31,6 +31,10 @@ afterAll(() => server.close());
 // eslint-disable-next-line testing-library/no-render-in-setup
 beforeEach(() => render(<MainPage />));
 
+afterEach(() => {
+  server.resetHandlers();
+});
+
 describe("Main Page mount", () => {
   it("must display the main page title", async () => {
     expect(
@@ -54,5 +58,29 @@ describe("Quotes List", () => {
     expect(firstQuote.textContent).toBe(fakeOne.quote);
     expect(secondQuote.textContent).toBe(fakeTwo.quote);
     expect(thirdQuote.textContent).toBe(fakeThird.quote);
+  });
+
+  it("must display author image", async () => {
+    expect(
+      await screen.findByText("Loading...", {}, { timeout: 3000 })
+    ).toBeInTheDocument();
+    // screen.debug();
+
+    const images = await screen.findAllByAltText(
+      "characterImg",
+      {},
+      { timeout: 6000 }
+    );
+    expect(images.length).toBeGreaterThanOrEqual(3);
+    // screen.debug();
+  });
+
+  it("Renders Error text when backend server response with error", async () => {
+    try {
+      render(<MainPage />);
+    } catch (error) {
+      const fetchedText = await screen.getAllByText(/Error:/i);
+      expect(fetchedText).toBeGreaterThanOrEqual(1);
+    }
   });
 });
